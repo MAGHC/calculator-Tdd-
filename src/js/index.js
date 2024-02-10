@@ -36,11 +36,34 @@ function App() {
     const newTotal = [...(currentTotalValue.slice(0, -1) + newOperator)].join('');
 
     isExistOperator ? ($total.innerText = newTotal) : ($total.innerText += newOperator);
+
+    if (newOperator === '=') {
+      OPERATORS.forEach((_) => {
+        if (currentTotalValue.includes(_)) {
+          const splitedArr = currentTotalValue.split(_);
+
+          switch (_) {
+            case '+':
+              $total.innerText = +splitedArr[0] + +splitedArr[1];
+              return;
+            case '-':
+              $total.innerText = +splitedArr[0] - +splitedArr[1];
+              return;
+            case 'X':
+              $total.innerText = +splitedArr[0] * +splitedArr[1];
+              return;
+            case '/':
+              $total.innerText = Math.floor(+splitedArr[0] / +splitedArr[1]);
+              return;
+          }
+        }
+      });
+    }
   };
 
   $digits.addEventListener('click', (e) => handleDigitClick(e, 'digit'));
   $operations.addEventListener('click', (e) => handleOperationClick(e, 'operation'));
-  $acBtn.addEventListener('click', (e) => {
+  $acBtn.addEventListener('click', () => {
     $total.innerText = 0;
   });
 }

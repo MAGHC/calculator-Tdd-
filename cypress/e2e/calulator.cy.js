@@ -85,7 +85,7 @@ describe('계산기 앱  테스트', () => {
     checkDisplayValue('#total', '0');
   });
 
-  xit('덧셈 123+456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+  it('덧셈 123+456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
     clickDigitBtns(['1', '2', '3']);
     clickOperateBtns(['+']);
     clickDigitBtns(['4', '5', '6']);
@@ -93,15 +93,15 @@ describe('계산기 앱  테스트', () => {
     checkDisplayValue('#total', '579');
   });
 
-  xit('곱셈 123*456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+  it('곱셈 123*456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
     clickDigitBtns(['1', '2', '3']);
-    clickOperateBtns(['*']);
+    clickOperateBtns(['X']);
     clickDigitBtns(['4', '5', '6']);
     clickOperateBtns(['=']);
     checkDisplayValue('#total', '56088');
   });
 
-  xit('뺄셈 123-456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+  it('뺄셈 123-456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
     clickDigitBtns(['1', '2', '3']);
     clickOperateBtns(['-']);
     clickDigitBtns(['4', '5', '6']);
@@ -109,7 +109,7 @@ describe('계산기 앱  테스트', () => {
     checkDisplayValue('#total', '-333');
   });
 
-  xit('나눗셈 123/456을 클릭하고 = 버튼을 누르면 display에 소수점을 버린 연산의 결과가 나온다', () => {
+  it('나눗셈 123/456을 클릭하고 = 버튼을 누르면 display에 소수점을 버린 연산의 결과가 나온다', () => {
     clickDigitBtns(['1', '2', '3']);
     clickOperateBtns(['/']);
     clickDigitBtns(['4', '5', '6']);
