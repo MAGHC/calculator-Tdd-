@@ -48,4 +48,10 @@ describe('계산기 앱  테스트', () => {
     clickDigitBtns(['1', '2', '3']);
     checkDisplayValue('#total', 123);
   });
+
+  it('3개의 숫자 를 누르고 연산자를 누르면 display에 나온다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    cy.get('.operation').contains('+').click();
+    checkDisplayValue('#total', '123+');
+  });
 });

@@ -3,11 +3,16 @@ const $ = (selector) => document.querySelector(selector);
 function App() {
   const $digits = $('.digits');
   const $total = $('#total');
+  const $operations = $('.operations');
 
-  const handleDigitClick = (e) => {
+  const handleClick = (e, contains) => {
     if (!e.target.classList.contains('digit')) {
       return;
     }
+  };
+
+  const handleDigitClick = (e, contains) => {
+    handleClick(e, contains);
 
     const currentTotal = $total.innerText;
     const newDigit = e.target.innerText;
@@ -15,7 +20,16 @@ function App() {
     currentTotal === '0' ? ($total.innerText = newDigit) : ($total.innerText += newDigit);
   };
 
-  $digits.addEventListener('click', handleDigitClick);
+  const handleOperationClick = (e, contains) => {
+    handleClick(e, contains);
+
+    const newOperator = e.target.innerText;
+
+    $total.innerText += newOperator;
+  };
+
+  $digits.addEventListener('click', (e) => handleDigitClick(e, 'digit'));
+  $operations.addEventListener('click', (e) => handleOperationClick(e, 'operation'));
 }
 
 App();
