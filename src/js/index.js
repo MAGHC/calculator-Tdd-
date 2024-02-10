@@ -1,5 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 
+const OPERATORS = ['/', '+', '-', 'X'];
+
 function App() {
   const $digits = $('.digits');
   const $total = $('#total');
@@ -25,7 +27,14 @@ function App() {
 
     const newOperator = e.target.innerText;
 
-    $total.innerText += newOperator;
+    const currentTotalValue = $total.innerText;
+    let convertedArr = currentTotalValue.split('');
+
+    const isExistOperator = OPERATORS.some((_) => convertedArr.slice(-1).includes(_));
+
+    const newTotal = [...(currentTotalValue.slice(0, -1) + newOperator)].join('');
+
+    isExistOperator ? ($total.innerText = newTotal) : ($total.innerText += newOperator);
   };
 
   $digits.addEventListener('click', (e) => handleDigitClick(e, 'digit'));

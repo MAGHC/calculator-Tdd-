@@ -10,6 +10,10 @@
 // - [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 
+const clickOperateBtns = (operators = []) => {
+  operators.forEach((_) => cy.get('.operation').contains(_).click());
+};
+
 const clickDigitBtns = (digits = []) => {
   digits.forEach((_) => cy.get('.digit').contains(_).click());
 };
@@ -51,7 +55,16 @@ describe('계산기 앱  테스트', () => {
 
   it('3개의 숫자 를 누르고 연산자를 누르면 display에 나온다', () => {
     clickDigitBtns(['1', '2', '3']);
-    cy.get('.operation').contains('+').click();
+
+    clickOperateBtns(['+']);
     checkDisplayValue('#total', '123+');
+  });
+
+  // 사용자입장고려
+
+  it('연산자 버튼을 여러번 누르면 display에 마지막 연산자만 표시한다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['+', '-']);
+    checkDisplayValue('#total', '123-');
   });
 });
