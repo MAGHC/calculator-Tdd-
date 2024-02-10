@@ -48,26 +48,23 @@ function App() {
     isExistOperator ? ($total.innerText = newTotal) : ($total.innerText += newOperator);
 
     if (newOperator === '=') {
-      OPERATORS.forEach((_) => {
-        if (currentTotalValue.includes(_)) {
-          const splitedArr = currentTotalValue.split(_);
+      const operator = currentTotalValue.slice(3, 4);
+      const splitedArr = currentTotalValue.split(operator);
 
-          switch (_) {
-            case '+':
-              $total.innerText = +splitedArr[0] + +splitedArr[1];
-              return;
-            case '-':
-              $total.innerText = +splitedArr[0] - +splitedArr[1];
-              return;
-            case 'X':
-              $total.innerText = +splitedArr[0] * +splitedArr[1];
-              return;
-            case '/':
-              $total.innerText = Math.floor(+splitedArr[0] / +splitedArr[1]);
-              return;
-          }
-        }
-      });
+      switch (operator) {
+        case '+':
+          $total.innerText = +splitedArr[0] + +splitedArr[1];
+          return;
+        case '-':
+          $total.innerText = +splitedArr[0] - +splitedArr[1];
+          return;
+        case 'X':
+          $total.innerText = +splitedArr[0] * +splitedArr[1];
+          return;
+        case '/':
+          $total.innerText = Math.floor(+splitedArr[0] / +splitedArr[1]);
+          return;
+      }
     }
   };
 
