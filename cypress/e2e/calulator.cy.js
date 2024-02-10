@@ -29,4 +29,11 @@ describe('계산기 앱  테스트', () => {
     cy.get('.digit').contains('1').click();
     cy.get('#total').should('have.text', 1);
   });
+
+  it('2개의 숫자 버튼을 클릭하면 display에 숫자가 표시된다.', () => {
+    cy.get('.digit').contains('1').click();
+    cy.get('.digit').contains('2').click();
+
+    cy.get('#total').should('have.text', 12);
+  });
 });
