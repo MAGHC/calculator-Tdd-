@@ -14,6 +14,10 @@ const clickDigitBtns = (digits = []) => {
   digits.forEach((_) => cy.get('.digit').contains(_).click());
 };
 
+const checkDisplayValue = (selector, value) => {
+  cy.get(selector).should('have.text', value);
+};
+
 describe('계산기 앱  테스트', () => {
   beforeEach('페이지 방문', () => {
     cy.visit('../../index.html');
@@ -23,7 +27,7 @@ describe('계산기 앱  테스트', () => {
 
   it('화면에 숫자 0이 기본표시 된다.', () => {
     // 돔에 접근하기위한
-    cy.get('#total').should('have.text', 0);
+    checkDisplayValue('#total', 0);
     // 버그가 적기 위해서는 코드량이 적을때 자주 리팩토링 하는것
   });
 
@@ -31,17 +35,17 @@ describe('계산기 앱  테스트', () => {
 
   it('1개의 숫자 버튼을 클릭하면 display에 숫자가 표시된다.', () => {
     clickDigitBtns(['1']);
-    cy.get('#total').should('have.text', 1);
+    checkDisplayValue('#total', 1);
   });
 
   it('2개의 숫자 버튼을 클릭하면 display에 숫자가 표시된다.', () => {
     clickDigitBtns(['1', '2']);
 
-    cy.get('#total').should('have.text', 12);
+    checkDisplayValue('#total', 12);
   });
 
   it('3개의 숫자버튼을 클릭하면 display에 숫자가 표현된다', () => {
     clickDigitBtns(['1', '2', '3']);
-    cy.get('#total').should('have.text', 123);
+    checkDisplayValue('#total', 123);
   });
 });
