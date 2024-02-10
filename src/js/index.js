@@ -1,14 +1,15 @@
 const $ = (selector) => document.querySelector(selector);
 
-const OPERATORS = ['/', '+', '-', 'X'];
+const OPERATORS = ['/', '+', '-', 'X', '='];
 
 function App() {
   const $digits = $('.digits');
   const $total = $('#total');
   const $operations = $('.operations');
+  const $acBtn = $('.modifier');
 
   const handleClick = (e, contains) => {
-    if (!e.target.classList.contains('digit')) {
+    if (!e.target.classList.contains(contains)) {
       return;
     }
   };
@@ -39,6 +40,9 @@ function App() {
 
   $digits.addEventListener('click', (e) => handleDigitClick(e, 'digit'));
   $operations.addEventListener('click', (e) => handleOperationClick(e, 'operation'));
+  $acBtn.addEventListener('click', (e) => {
+    $total.innerText = 0;
+  });
 }
 
 App();

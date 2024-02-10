@@ -7,7 +7,7 @@
 // - [ ] 2개의 숫자에 대해 곱셈이 가능하다.
 // - [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
 // - [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
-// - [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
+// - [x] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 
 const clickOperateBtns = (operators = []) => {
@@ -75,4 +75,47 @@ describe('계산기 앱  테스트', () => {
 
     checkDisplayValue('#total', '123-123');
   });
+
+  it('AC(All Clear)버튼을 누르면 0으로 초기화 한다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['+', '-']);
+    clickDigitBtns(['4', '5', '6']);
+    clickOperateBtns(['=']);
+    cy.get('.modifier').contains('AC').click();
+    checkDisplayValue('#total', '0');
+  });
+
+  xit('덧셈 123+456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['+']);
+    clickDigitBtns(['4', '5', '6']);
+    clickOperateBtns(['=']);
+    checkDisplayValue('#total', '579');
+  });
+
+  xit('곱셈 123*456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['*']);
+    clickDigitBtns(['4', '5', '6']);
+    clickOperateBtns(['=']);
+    checkDisplayValue('#total', '56088');
+  });
+
+  xit('뺄셈 123-456을 클릭하고 = 버튼을 누르면 display에 연산의 결과가 나온다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['-']);
+    clickDigitBtns(['4', '5', '6']);
+    clickOperateBtns(['=']);
+    checkDisplayValue('#total', '-333');
+  });
+
+  xit('나눗셈 123/456을 클릭하고 = 버튼을 누르면 display에 소수점을 버린 연산의 결과가 나온다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['/']);
+    clickDigitBtns(['4', '5', '6']);
+    clickOperateBtns(['=']);
+    checkDisplayValue('#total', '0');
+  });
 });
+
+// xit을 하면 체크하지않는것으로 실행이안됨
