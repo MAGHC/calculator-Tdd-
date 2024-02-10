@@ -67,4 +67,12 @@ describe('계산기 앱  테스트', () => {
     clickOperateBtns(['+', '-']);
     checkDisplayValue('#total', '123-');
   });
+
+  it('2번쨰 숫자를 입력하면 display에 2번쨰 숫자를 누적하여 표시한다. ', () => {
+    clickDigitBtns(['1', '2', '3']);
+    clickOperateBtns(['+', '-']);
+    clickDigitBtns(['1', '2', '3']);
+
+    checkDisplayValue('#total', '123-123');
+  });
 });
