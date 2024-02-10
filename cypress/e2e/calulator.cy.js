@@ -10,6 +10,10 @@
 // - [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 
+const clickDigitBtns = (digits = []) => {
+  digits.forEach((_) => cy.get('.digit').contains(_).click());
+};
+
 describe('계산기 앱  테스트', () => {
   beforeEach('페이지 방문', () => {
     cy.visit('../../index.html');
@@ -26,14 +30,18 @@ describe('계산기 앱  테스트', () => {
   // 리팩터링이 끝났다면 다음 테스트케이스
 
   it('1개의 숫자 버튼을 클릭하면 display에 숫자가 표시된다.', () => {
-    cy.get('.digit').contains('1').click();
+    clickDigitBtns(['1']);
     cy.get('#total').should('have.text', 1);
   });
 
   it('2개의 숫자 버튼을 클릭하면 display에 숫자가 표시된다.', () => {
-    cy.get('.digit').contains('1').click();
-    cy.get('.digit').contains('2').click();
+    clickDigitBtns(['1', '2']);
 
     cy.get('#total').should('have.text', 12);
+  });
+
+  it('3개의 숫자버튼을 클릭하면 display에 숫자가 표현된다', () => {
+    clickDigitBtns(['1', '2', '3']);
+    cy.get('#total').should('have.text', 123);
   });
 });
