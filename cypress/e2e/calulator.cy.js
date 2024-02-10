@@ -116,6 +116,11 @@ describe('계산기 앱  테스트', () => {
     clickOperateBtns(['=']);
     checkDisplayValue('#total', '0');
   });
+
+  it('숫자는 한번에 3개까지만 입력한다. ', () => {
+    clickDigitBtns(['1', '2', '3', '4']);
+    checkDisplayValue('#total', '123');
+  });
 });
 
 // xit을 하면 체크하지않는것으로 실행이안됨

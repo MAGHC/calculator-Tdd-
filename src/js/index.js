@@ -20,7 +20,17 @@ function App() {
     const currentTotal = $total.innerText;
     const newDigit = e.target.innerText;
 
-    currentTotal === '0' ? ($total.innerText = newDigit) : ($total.innerText += newDigit);
+    if (currentTotal.length > 3) {
+      const operator = currentTotal.slice(3, 4);
+      const splitedArr = currentTotal.split(operator);
+      if (splitedArr[1].length < 3) {
+        $total.innerText += newDigit;
+      }
+    }
+
+    if (typeof +currentTotal === 'number' && currentTotal.length < 3) {
+      currentTotal === '0' ? ($total.innerText = newDigit) : ($total.innerText += newDigit);
+    }
   };
 
   const handleOperationClick = (e, contains) => {
